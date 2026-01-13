@@ -1,0 +1,129 @@
+version: '3.8'
+
+services:
+  # ============================================
+  # REDPANDA - Kafka-compatible Message Broker
+  # ============================================
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.3.5
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082
+      - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --rpc-addr redpanda:33145
+      - --advertise-rpc-addr redpanda:33145
+      - --smp 1
+      - --memory 1G
+      - --mode dev-container
+      - --default-log-level=info
+    ports:
+      - "19092:19092"   # External Kafka API
+      - "18082:18082"   # Pandaproxy
+      - "18081:18081"   # Schema Registry
+      - "9644:9644"     # Admin API
+    networks:
+      - fraud-net
+    healthcheck:
+      test: ["CMD", "rpk", "cluster", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # FLINK JOBMANAGER - Stream Processing Master
+  # ============================================
+  flink-jobmanager:
+    image: flink:1.18-java11
+    container_name: flink-jobmanager
+    ports:
+      - "8081:8081"   # Flink Web UI
+    command: jobmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        parallelism.default: 2
+    networks:
+      - fraud-net
+    depends_on:
+      redpanda:
+        condition: service_healthy
+
+  # ============================================
+  # FLINK TASKMANAGER - Stream Processing Worker
+  # ============================================
+  flink-taskmanager:
+    image: flink:1.18-java11
+    container_name: flink-taskmanager
+    command: taskmanager
+    environment:
+      - |
+        FLINK_PROPERTIES=
+        jobmanager.rpc.address: flink-jobmanager
+        taskmanager.numberOfTaskSlots: 4
+        parallelism.default: 2
+    networks:
+      - fraud-net
+    depends_on:
+      - flink-jobmanager
+    deploy:
+      replicas: 1
+
+  # ============================================
+  # CLICKHOUSE - OLAP Database
+  # ============================================
+  clickhouse:
+    image: clickhouse/clickhouse-server:23.12
+    container_name: clickhouse
+    ports:
+      - "8123:8123"   # HTTP interface
+      - "9000:9000"   # Native client
+    volumes:
+      - clickhouse-data:/var/lib/clickhouse
+      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    environment:
+      - CLICKHOUSE_DB=fraud_detection
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=
+    networks:
+      - fraud-net
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # DATA GENERATOR - Synthetic Transaction Producer
+  # ============================================
+  generator:
+    build:
+      context: ../generator
+      dockerfile: Dockerfile
+    container_name: generator
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=redpanda:9092
+      - KAFKA_TOPIC=financial_transactions
+    networks:
+      - fraud-net
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    restart: unless-stopped
+
+networks:
+  fraud-net:
+    driver: bridge
+
+volumes:
+  clickhouse-data:
