@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv/
+ENV/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Docker
+*.log
+
+# Node.js (dashboard)
+node_modules/
+.next/
+out/
+.vercel
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ClickHouse data (if running locally)
+clickhouse-data/
+
+# Flink checkpoints
+checkpoints/
