@@ -76,34 +76,6 @@ services:
       replicas: 1
 
   # ============================================
-  # CLICKHOUSE - OLAP Database
-  # ============================================
-  clickhouse:
-    image: clickhouse/clickhouse-server:23.12
-    container_name: clickhouse
-    ports:
-      - "8123:8123"   # HTTP interface
-      - "9000:9000"   # Native client
-    volumes:
-      - clickhouse-data:/var/lib/clickhouse
-      - ../database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
-    environment:
-      - CLICKHOUSE_DB=fraud_detection
-      - CLICKHOUSE_USER=default
-      - CLICKHOUSE_PASSWORD=
-    networks:
-      - fraud-net
-    ulimits:
-      nofile:
-        soft: 262144
-        hard: 262144
-    healthcheck:
-      test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  # ============================================
   # DATA GENERATOR - Synthetic Transaction Producer
   # ============================================
   generator:
@@ -121,9 +93,32 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  # ============================================
+  # FLINK PROCESSOR - Fraud Detection Job
+  # ============================================
+  # Note: This is commented out by default. 
+  # You'll need to submit the job manually to Flink JobManager
+  # or uncomment this and provide your Supabase credentials
+  #
+  # processor:
+  #   build:
+  #     context: ../processor
+  #     dockerfile: Dockerfile
+  #   container_name: processor
+  #   environment:
+  #     - KAFKA_BOOTSTRAP_SERVERS=redpanda:9092
+  #     - INPUT_TOPIC=financial_transactions
+  #     - JDBC_URL=${JDBC_URL}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   networks:
+  #     - fraud-net
+  #   depends_on:
+  #     - flink-jobmanager
+  #     - flink-taskmanager
+  #     - redpanda
+  #   restart: unless-stopped
+
 networks:
   fraud-net:
     driver: bridge
-
-volumes:
-  clickhouse-data:
