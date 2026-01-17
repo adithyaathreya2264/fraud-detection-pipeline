@@ -1,0 +1,226 @@
+/* 
+ * Fraud Detection Dashboard Styles
+ * Premium dark theme with glassmorphism effects
+ */
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: rgba(18, 18, 26, 0.8);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent-red: #ef4444;
+  --accent-amber: #f59e0b;
+  --accent-blue: #3b82f6;
+  --accent-violet: #8b5cf6;
+  --accent-emerald: #10b981;
+  --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.main {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  background-image: 
+    radial-gradient(ellipse at 10% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(239, 68, 68, 0.05) 0%, transparent 70%);
+  padding: 2rem;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+}
+
+.title {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  margin: 0 !important;
+}
+
+.subtitle {
+  color: var(--text-secondary) !important;
+  margin-top: 0.25rem !important;
+}
+
+.statusContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* KPI Grid */
+.kpiGrid {
+  gap: 1.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.kpiCard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(12px) !important;
+  padding: 1.5rem !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.kpiCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.fraudMetric {
+  color: var(--accent-red) !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+}
+
+.amountMetric {
+  color: var(--accent-amber) !important;
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+}
+
+.progressBar {
+  margin-top: 1rem !important;
+}
+
+/* Main Grid */
+.mainGrid {
+  gap: 1.5rem !important;
+}
+
+/* Chart Card */
+.chartCard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(12px) !important;
+  padding: 1.5rem !important;
+}
+
+.chart {
+  height: 320px !important;
+  margin-top: 1.5rem !important;
+}
+
+/* Alerts Card */
+.alertsCard {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  backdrop-filter: blur(12px) !important;
+  padding: 1.5rem !important;
+}
+
+.alertsTableContainer {
+  margin-top: 1.5rem;
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.alertsTableContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.alertsTableContainer::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 3px;
+}
+
+.alertsTableContainer::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.alertAmount {
+  font-weight: 600 !important;
+  color: var(--accent-red) !important;
+}
+
+/* No Data State */
+.noData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+}
+
+/* Tremor Overrides */
+:global(.tremor-Card-root) {
+  background: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+:global(.tremor-Title-root),
+:global(.tremor-Metric-root) {
+  color: var(--text-primary) !important;
+}
+
+:global(.tremor-Text-root) {
+  color: var(--text-secondary) !important;
+}
+
+:global(.tremor-TableHead-root) {
+  background: var(--bg-secondary) !important;
+}
+
+:global(.tremor-TableHeaderCell-root) {
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color) !important;
+}
+
+:global(.tremor-TableCell-root) {
+  border-color: var(--border-color) !important;
+}
+
+:global(.tremor-TableRow-root:hover) {
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem !important;
+  }
+
+  .kpiGrid {
+    gap: 1rem !important;
+  }
+
+  .fraudMetric {
+    font-size: 2rem !important;
+  }
+}
