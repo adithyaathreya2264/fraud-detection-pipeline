@@ -1,4 +1,4 @@
-# 🏦 Real-Time Financial Fraud Detection Pipeline
+# Real-Time Financial Fraud Detection Pipeline
 
 A complete **Kappa Architecture** implementation for real-time fraud detection using modern streaming technologies with cloud database (Supabase PostgreSQL).
 
