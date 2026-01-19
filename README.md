@@ -117,7 +117,7 @@ npm run dev -- -p 3050
 
 Open **http://localhost:3050** to view the live dashboard.
 
-## 🔍 Fraud Detection Logic
+##  Fraud Detection Logic
 
 The PyFlink processor implements these fraud detection rules within a **1-minute tumbling window**:
 
