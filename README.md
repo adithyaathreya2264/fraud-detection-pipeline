@@ -2,7 +2,7 @@
 
 A complete **Kappa Architecture** implementation for real-time fraud detection using modern streaming technologies with cloud database (Supabase PostgreSQL).
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 ┌─────────────┐     ┌───────────┐     ┌─────────────┐     ┌──────────────────┐     ┌───────────┐
