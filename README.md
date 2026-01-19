@@ -42,7 +42,7 @@ fraud-detection-pipeline/
         └── styles/
 ```
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 - Docker & Docker Compose
