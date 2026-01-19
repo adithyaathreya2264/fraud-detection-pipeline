@@ -212,6 +212,4 @@ docker compose down -v
 - ✅ **Global CDN**: Fast queries worldwide
 - ✅ **PostgreSQL**: Standard SQL, great tooling
 
-## 📝 License
 
-MIT
