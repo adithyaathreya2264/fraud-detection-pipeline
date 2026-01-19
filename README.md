@@ -15,7 +15,7 @@ A complete **Kappa Architecture** implementation for real-time fraud detection u
                                       fraud_alerts + transactions
 ```
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 fraud-detection-pipeline/
