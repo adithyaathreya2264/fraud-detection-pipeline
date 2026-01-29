@@ -123,10 +123,10 @@ The PyFlink processor implements these fraud detection rules within a **1-minute
 
 | Rule | Condition | Description |
 |------|-----------|-------------|
-| 🚨 High Amount | `total_amount > $3,000` | Unusual spending within window |
-| 🚨 Rapid Fire | `transaction_count > 5` | Too many transactions in short time |
+| High Amount | `total_amount > $3,000` | Unusual spending within window |
+| Rapid Fire | `transaction_count > 5` | Too many transactions in short time |
 
-## 📊 Data Flow
+## Data Flow
 
 1. **Generator** produces transactions with:
    - Normal behavior: $10-$100 amounts
