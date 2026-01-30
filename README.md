@@ -151,7 +151,7 @@ The PyFlink processor implements these fraud detection rules within a **1-minute
    - Transactions per minute chart
    - Recent fraud alerts
 
-## 🛠️ Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -167,14 +167,14 @@ The PyFlink processor implements these fraud detection rules within a **1-minute
 - `KAFKA_BOOTSTRAP_SERVERS`: Kafka broker address (default: `redpanda:9092`)
 - `KAFKA_TOPIC`: Output topic (default: `financial_transactions`)
 
-## 📈 Monitoring
+## Monitoring
 
 - **Flink Web UI**: http://localhost:8081
 - **Redpanda Admin**: http://localhost:9644
 - **Dashboard**: http://localhost:3050
 - **Supabase Dashboard**: https://app.supabase.com/project/_/editor
 
-## 🔧 Verify Data Flow
+## Verify Data Flow
 
 ```bash
 # Check Redpanda topics
@@ -185,14 +185,14 @@ docker exec -it redpanda rpk topic list
 # SELECT * FROM fraud_alerts WHERE is_fraud = 1 LIMIT 10;
 ```
 
-## 🧹 Cleanup
+## Cleanup
 
 ```bash
 cd infra
 docker compose down -v
 ```
 
-## 📚 Tech Stack
+## Tech Stack
 
 | Component | Technology |
 |-----------|------------|
@@ -204,7 +204,7 @@ docker compose down -v
 | Visualization | Tremor React |
 | Infrastructure | Docker Compose |
 
-## 🌩️ Why Supabase?
+## Why Supabase?
 
 - ✅ **Free tier**: Great for development and demos
 - ✅ **Real-time subscriptions**: Potential for live dashboard updates
