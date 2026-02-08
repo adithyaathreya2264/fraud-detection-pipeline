@@ -206,10 +206,10 @@ docker compose down -v
 
 ## Why Supabase?
 
-- ✅ **Free tier**: Great for development and demos
-- ✅ **Real-time subscriptions**: Potential for live dashboard updates
-- ✅ **Managed**: No database ops required
-- ✅ **Global CDN**: Fast queries worldwide
-- ✅ **PostgreSQL**: Standard SQL, great tooling
+- **Free tier**: Great for development and demos
+- **Real-time subscriptions**: Potential for live dashboard updates
+- **Managed**: No database ops required
+- **Global CDN**: Fast queries worldwide
+- **PostgreSQL**: Standard SQL, great tooling
 
 
