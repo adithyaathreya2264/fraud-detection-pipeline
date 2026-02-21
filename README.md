@@ -4,7 +4,7 @@ A complete **Kappa Architecture** implementation for real-time fraud detection u
 
 ##  Architecture
 
-```
+
 ┌─────────────┐     ┌───────────┐     ┌─────────────┐     ┌──────────────────┐     ┌───────────┐
 │   Generator │────▶│  Redpanda │────▶│   PyFlink   │────▶│    Supabase      │────▶│ Dashboard │
 │  (Python)   │     │  (Kafka)  │     │ (Processor) │     │  (PostgreSQL)    │     │ (Next.js) │
@@ -13,7 +13,7 @@ A complete **Kappa Architecture** implementation for real-time fraud detection u
                                               │ JDBC writes to cloud
                                               ▼
                                       fraud_alerts + transactions
-```
+
 
 ##  Project Structure
 
