@@ -3,7 +3,7 @@
 A complete **Kappa Architecture** implementation for real-time fraud detection using modern streaming technologies with cloud database (Supabase PostgreSQL).
 
 ##  Architecture
-
+```
 
 ┌─────────────┐     ┌───────────┐     ┌─────────────┐     ┌──────────────────┐     ┌───────────┐
 │   Generator │────▶│  Redpanda │────▶│   PyFlink   │────▶│    Supabase      │────▶│ Dashboard │
@@ -13,7 +13,7 @@ A complete **Kappa Architecture** implementation for real-time fraud detection u
                                               │ JDBC writes to cloud
                                               ▼
                                       fraud_alerts + transactions
-
+```
 
 ##  Project Structure
 
